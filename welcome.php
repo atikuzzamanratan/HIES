@@ -13,11 +13,11 @@
                     <header class="card-header">
                         <h2 class="card-title">Welcome, <span style="color: teal"><?php echo $loggedUserFullName; ?></span></h2>
                     </header>
-                    <div class="card-body" style="text-align: center; height: 100vh">
+                    <div class="card-body" style="text-align: center; height: 100vh;">
                         <!-- <div><h3>Welcome to the project</h3></div>-->
 
-                        <div><img src="img/bbs-logo.png" alt="SAS Logo" height="300px"></div>
-
+                        <div><img src="img/bbs-logo.png" alt="BBS Logo" height="350px"></div>
+                        <div style="height: 30px"></div>
                         <div>
                             <!--<b style="font-size: 17px; line-height: 2"><?php /*echo $projectDescription; */?></b>
                             <p style="font-size: 17px; line-height: 2"><?php /*echo $projectDescription2; */?></p>-->
