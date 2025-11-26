@@ -73,7 +73,7 @@ if ($_POST['login'] === "login") {
 </head>
 <!-- <body style="background-image: url('../../img/cps-web-bg.jpg')"> -->
 
-<body style="background-image: url('../../img/sas-login-bg.jpg')">
+<body style="background-image: url('../img/bpls-login-bg.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover;">
 
 <!-- start: page -->
 <section class="body-sign">
