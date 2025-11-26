@@ -24,7 +24,7 @@ $SuperID = $resQrySupervisor->id;
                                     <select data-plugin-selectTwo id="SelectedFormID" name="SelectedFormID"
                                             class="form-control populate" required
                                             onchange="getRecordID(document.getElementById('SelectedFormID').value)">
-                                        <optgroup label="Select Form">
+                                        <option value="">Choose form</option>
                                             <?PHP
                                             $qryForm = $app->getDBConnection()->query("SELECT id, FormName FROM datacollectionform WHERE Status = 'Active' AND CompanyID = ?", $loggedUserCompanyID);
 
@@ -32,7 +32,6 @@ $SuperID = $resQrySupervisor->id;
                                                 echo '<option value="' . $row->id . '">' . $row->FormName . '</option>';
                                             }
                                             ?>
-                                        </optgroup>
                                     </select>
                                 </div>
                             </div>

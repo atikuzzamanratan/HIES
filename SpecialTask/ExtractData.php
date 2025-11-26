@@ -24,15 +24,14 @@ $conn = PDOConnectDB();
                                 <div class="col-lg-6">
                                     <select data-plugin-selectTwo id="SelectedFormID" name="SelectedFormID"
                                             class="form-control populate" required>
-                                        <optgroup label="Select Form">
+                                        <option value="">Choose form</option>
                                             <?PHP
-                                            $qryForm = $app->getDBConnection()->query("SELECT id, FormName FROM datacollectionform WHERE CompanyID = ?", $loggedUserCompanyID);
+                                            $qryForm = $app->getDBConnection()->query("SELECT id, FormName FROM datacollectionform WHERE Status = 'Active' AND CompanyID = ?", $loggedUserCompanyID);
 
                                             foreach ($qryForm as $row) {
                                                 echo '<option value="' . $row->id . '">' . $row->FormName . '</option>';
                                             }
                                             ?>
-                                        </optgroup>
 
                                     </select>
                                 </div>

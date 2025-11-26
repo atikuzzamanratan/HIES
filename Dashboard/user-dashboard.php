@@ -35,15 +35,14 @@ if (is_null($FormID) || is_null($UserID)) {
                                     <div class="col-lg-6">
                                         <select data-plugin-selectTwo class="form-control populate" name="FormID"
                                                 id="FormID" required>
-                                                <optgroup label="Select Form">
+                                            <option value="">Choose form</option>
                                                 <?PHP
-                                                $userForms = $app->getDBConnection()->query('select distinct id, FormName from datacollectionform WHERE CompanyID = ?', $loggedUserCompanyID);
+                                                $userForms = $app->getDBConnection()->query('select distinct id, FormName from datacollectionform WHERE Status = ? AND CompanyID = ?', 'Active', $loggedUserCompanyID);
 
                                                 foreach ($userForms as $row) {
                                                     echo '<option value="' . $row->id . '">' . $row->FormName . '</option>';
                                                 }
                                                 ?>
-                                            </optgroup>
 
                                         </select>
                                     </div>

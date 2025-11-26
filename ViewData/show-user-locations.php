@@ -30,15 +30,14 @@ if(isset($_REQUEST['show']) && $_REQUEST['show'] === 'Show') {
                                 <div class="col-lg-6">
                                     <select data-plugin-selectTwo id="SelectedFormID" name="SelectedFormID"
                                             class="form-control populate" required>
-                                        <optgroup label="Choose form">
+                                        <option value="">Choose form</option>
                                             <?PHP
-                                            $qryForm = $app->getDBConnection()->query("SELECT id, FormName FROM datacollectionform WHERE CompanyID = ?", $loggedUserCompanyID);
+                                            $qryForm = $app->getDBConnection()->query("SELECT id, FormName FROM datacollectionform WHERE Status = ? AND CompanyID = ?", 'Active', $loggedUserCompanyID);
 
                                             foreach ($qryForm as $row) {
                                                 echo '<option value="' . $row->id . '"' . (isset($SelectedFormID) && !empty($SelectedFormID) && $row->id == $SelectedFormID ? ' selected' : '') . '>' . $row->FormName . '</option>';
                                             }
                                             ?>
-                                        </optgroup>
                                     </select>
                                 </div>
                             </div>

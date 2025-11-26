@@ -63,13 +63,12 @@ if ($_REQUEST['show'] === 'Show') {
                                 <div class="col-lg-6">
                                     <select data-plugin-selectTwo class="form-control populate" name="FormID"
                                         id="FormID" required>
-                                        <optgroup label="Select Form">
+                                        <option value="">Choose form</option>
                                             <?PHP
                                             foreach ($rsQryFormName as $row) {
                                                 echo '<option value="' . $row->id . '"' . (isset($FormID) && !empty($FormID) && $row->id == $FormID ? ' selected' : '') . '>' . $row->FormName . '</option>';
                                             }
                                             ?>
-                                        </optgroup>
                                     </select>
                                 </div>
                             </div>
