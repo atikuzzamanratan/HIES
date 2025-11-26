@@ -68,7 +68,7 @@ $baseURL = get_base_url();
 
 function getDBMain(): string
 {
-    return "SAS_2";
+    return "HIES";
 }
 
 function ConnectDB()
