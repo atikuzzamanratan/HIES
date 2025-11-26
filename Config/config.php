@@ -9,9 +9,9 @@ function get_base_url()
     return env('APP_URL');
 }
 
-$projectName = 'Sustainable Agriculture Statistics';
-$projectDescription= 'Sustainable Agriculture Statistics (SAS) - 2025';
-$projectDescription2= 'টেকসই কৃষি পরিসংখ্যান (এসএএস) ২০২৫';
+$projectName = 'Household Income and Expenditure Survey (HIES)';
+$projectDescription= 'Household Income and Expenditure Survey (HIES)';
+$projectDescription2= 'হাউসহোল্ড ইনকাম এন্ড এক্সপেন্ডিচার সার্ভে (HIES)';
 
 $adminUserID = '2';
 
