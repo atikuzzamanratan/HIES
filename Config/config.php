@@ -9,9 +9,9 @@ function get_base_url()
     return env('APP_URL');
 }
 
-$projectName = 'Household Income and Expenditure Survey (HIES)';
-$projectDescription= 'Household Income and Expenditure Survey (HIES)';
-$projectDescription2= 'হাউসহোল্ড ইনকাম এন্ড এক্সপেন্ডিচার সার্ভে (HIES)';
+$projectName = 'Bangladesh Poverty and Livelihood Statistics (BPLS)';
+$projectDescription= 'Bangladesh Poverty and Livelihood Statistics (BPLS)';
+$projectDescription2= 'Bangladesh Poverty and Livelihood Statistics (BPLS)';
 
 $adminUserID = '2';
 
