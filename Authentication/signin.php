@@ -88,7 +88,7 @@ if ($_POST['login'] === "login") {
         <div class="panel card-sign" style="background: #f2f4f4 ; padding-top: 20px">
             <div class="card-title-sign mt-3 text-end">
                 <h2 class="title text-uppercase font-weight-bold m-0"><i
-                            class="bx bx-user-circle me-1 text-6 position-relative top-5"></i> Sign In</h2>
+                            class="bx bx-user-circle me-1 text-6 position-relative top-5"></i> Login</h2>
             </div>
             <div class="card-body" style="background: #f2f4f4 ">
                 <form action="../index.php" method="post">
@@ -122,7 +122,7 @@ if ($_POST['login'] === "login") {
                             </div>
                         </div>
                         <div class="col-sm-4 text-end">
-                            <button type="submit" class="btn btn-primary mt-2" name="login" value="login">Sign In
+                            <button type="submit" class="btn btn-primary mt-2" name="login" value="login">Login
                             </button>
                         </div>
                     </div>

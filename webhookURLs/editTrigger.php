@@ -32,7 +32,7 @@ $conn = PDOConnectDB();
 $cn = ConnectDB();
 
 $odkClient = new ODKAPIClient("sse1.sakib@gmail.com", 'DkPas@12345678');
-$projectId = 4;  // ← your active ODK project
+$projectId = 6;  // ← your active ODK project
 
 $odkClient->getDataFromServer("projects/$projectId/forms/$xmlFormId/submissions/uuid:$instance_id.xml", "");
 

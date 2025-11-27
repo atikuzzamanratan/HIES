@@ -90,7 +90,6 @@ $sql = "SELECT
             xfrg.ColumnName AS DataName, 
             COALESCE(un.ColumnValue, '') AS ColumnValue,
             CASE 
-                -- Hide carried-over or resolved comments
                 WHEN un.IsEdited = 0 
                      AND (un.Comments LIKE '%Edited at%' 
                           OR un.Comments LIKE '%Says at%' 
@@ -351,7 +350,6 @@ if (!$dom->loadXML($xml)) {
 } else {
     log_dbg("✅ XML validated successfully before submission");
 }
-
 
 log_dbg("Built XML length=" . strlen($xml) . " instanceUUID=$instanceUUID");
 file_put_contents(__DIR__ . "/generated.xml", $xml);
