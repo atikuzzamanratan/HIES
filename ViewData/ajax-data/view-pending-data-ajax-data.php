@@ -1,17 +1,15 @@
 <?php
 ob_start();
-// error_reporting(1);
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 set_error_handler(function($errno, $errstr, $errfile, $errline) {
     if ($errno === E_NOTICE || $errno === E_WARNING) {
-        // log to file but don't break JSON
         file_put_contents(__DIR__ . '/_ajax_error_log.txt', 
             date('Y-m-d H:i:s') . " [$errno] $errstr in $errfile:$errline\n", FILE_APPEND);
-        return true; // prevent default handling
+        return true;
     }
-    return false; // other errors handled normally
+    return false;
 });
 
 header('Content-Type: application/json');
@@ -152,7 +150,7 @@ if (!empty($_POST)) {
         $qry .= " OR pl.DivisionName like'%" . $request['search']['value'] . "%'";
         $qry .= " OR pl.DistrictName like'%" . $request['search']['value'] . "%')";
     }
-    // die("SQL: ".$qry);
+    
     $rs = db_query($qry, $cn);
 
     if ($rs === false) {
@@ -205,8 +203,7 @@ if (!empty($_POST)) {
         $DataName = $row->DataName;
         $XFormsFilePath = $row->XFormsFilePath;
         $DeviceID = $row->DeviceID;
-        // $EntryDate = date_format($row->EntryDate, 'd-m-Y H:i:s');
-
+        
         $EntryDate = '';
         if (!empty($row->EntryDate)) {
             $EntryDate = date('d-m-Y H:i:s', strtotime($row->EntryDate));
@@ -252,6 +249,9 @@ if (!empty($_POST)) {
         $SubData = array();
 
         $actions = "<div style= \"display: flex; align-items: center; justify-content: center;\">
+
+                    <button title=\"$btnTitleView\" type=\"button\" class=\"simple-ajax-modal btn btn-outline-dark\" style=\"display: inline-block;margin: 0 1px;\" data-bs-toggle=\"modal\" data-bs-target=\"#viewDataModalForViewOnly\" onclick=\"ShowDataDetailForViewOnly('$DataFromID','$RecordID', '$IsApproved', '$PSU', '$LoggedUserID', '$UserID', '$XFormsFilePath')\" onmouseover=\"this.style.backgroundColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(0%)';\" onmouseout=\"this.style.backgroundColor='transparent'; this.querySelector('img').style.filter='grayscale(100%)';\"><img src=\"../../img/view-files.png\" alt=\"View\" style=\"width:16px; height:16px; filter: grayscale(100%); transition: filter 0.3s ease;\"></button>
+
                     <button title=\"$btnTitleView\" type=\"button\" class=\"simple-ajax-modal btn btn-outline-primary\" style=\"display: inline-block;margin: 0 1px;\" data-bs-toggle=\"modal\" data-bs-target=\"#viewDataModal\" onclick=\"ShowDataDetail('$DataFromID','$RecordID', '$IsApproved', '$PSU', '$LoggedUserID', '$UserID', '$XFormsFilePath')\"><i class=\"fas fa-eye\"></i></button>
                     
                     <button title=\"$btnTitleNotice\" type=\"button\" class=\"btn btn-outline-secondary\" style=\"display: inline-block;margin: 0 1px;\" data-bs-toggle=\"modal\" data-bs-target=\"#sendNoticeModal$RecordID\"><i class=\"fas fa-bell\"></i></button>
@@ -278,12 +278,42 @@ if (!empty($_POST)) {
                             }); 
                         return false;
                     }
+                    function ShowDataDetailForViewOnly(dataFromID,recordID, isAproved, psu, loggedUserID, agentID, XFormsFilePath, data) {
+                            $.ajax({
+                                url: 'ViewData/ajax-data/data-detail-view-pending-data-for-view-only.php',
+                                method: 'GET',
+                                datatype: 'json',
+                                data: {
+                                    dataFromID: dataFromID,
+                                    id: recordID,
+                                    status: isAproved,
+                                    psu: psu,
+                                    loggedUserID: loggedUserID,
+                                    agentID: agentID,
+                                    XFormsFilePath: XFormsFilePath
+                                },
+                                success: function (response) {
+                                    //alert(response);
+                                    $('#dataViewDivForViewOnly').html(response);
+                                }
+                            }); 
+                        return false;
+                    }
                 </script>
                 
                 <!-- View Data Modal-->
-                <div class=\"modal fade bd-example-modal-lg\" id=\"viewDataModal\" tabindex=\"-1\" aria-labelledby=\"editDataModalLabel\" aria-hidden=\"true\">
-                  <div class=\"modal-dialog modal-lg\">
+                <div class=\"modal fade bd-example-modal-xl\" id=\"viewDataModal\" tabindex=\"-1\" aria-labelledby=\"editDataModalLabel\" aria-hidden=\"true\">
+                  <div class=\"modal-dialog modal-xl\">
                     <div id=\"dataViewDiv\" class=\"modal-content\">
+                      
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- View Data Modal For View Only-->
+                <div class=\"modal fade bd-example-modal-xl\" id=\"viewDataModalForViewOnly\" tabindex=\"-1\" aria-labelledby=\"editDataModalLabelForViewOnly\" aria-hidden=\"true\">
+                  <div class=\"modal-dialog modal-xl\">
+                    <div id=\"dataViewDivForViewOnly\" class=\"modal-content\">
                       
                     </div>
                   </div>

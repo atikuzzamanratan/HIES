@@ -12,9 +12,13 @@ include "../../Config/config.php";
 include "../../Lib/lib.php";
 
 $RecordID = xss_clean($_REQUEST['id']);
+$AgentID = getValue('xformrecord', 'UserID', "id = $RecordID");
 $IsApproved = xss_clean($_REQUEST['status']);
 $PSU = xss_clean($_REQUEST['psu']);
 $DataFromID = xss_clean($_REQUEST['formID']);
+
+$LoggedUserID = xss_clean($_REQUEST['loggedUserID']);
+$LoggedUserName = getValue('userinfo', 'UserName', "id = $LoggedUserID");
 
 
 if ($IsApproved == 0) {
@@ -155,24 +159,23 @@ foreach ($ModuleGroupData as $ModuleName => $ModuleData) {
         </div>
     ";
 }
-
 $dataViewTable .= "</div></form>";
 
 $dataViewTable .= "<div class=\"modal-footer\">";
-if ((strpos($LoggedUserName, 'admin') !== false) or $ApprovePermission == 1 or (strpos($LoggedUserName, 'dist') !== false) || (strpos($LoggedUserName, 'val') !== false)) {
+/*if ((strpos($LoggedUserName, 'admin') !== false) or $ApprovePermission == 1 or (strpos($LoggedUserName, 'dist') !== false) || (strpos($LoggedUserName, 'val') !== false)) {
     $dataViewTable .= "<button type=\"button\" class=\"btn btn-success\" name=\"update\" id=\"update\" value=\"Update\" 
                         onclick= \"ApproveDataRecord('$RecordID');\"> Approve</button>";
-}
+}*/
 
-if ((strpos($LoggedUserName, 'admin') !== false) or $EditPermission == 1 or (strpos($LoggedUserName, 'dist') !== false) or (strpos($LoggedUserName, 'val') !== false)) {
+if ((strpos($LoggedUserName, 'admin') !== false) and ($IsApproved != 2)) {
     $dataViewTable .= "<button type=\"button\" class=\"btn btn-warning\" name=\"update\" id=\"update\" value=\"Update\" 
                         onclick= \"UnapproveDataRecord('$RecordID', '$AgentID');\"> Un-approve</button>";
 }
 
-if (((strpos($LoggedUserName, 'admin') !== false) or $DeletePermission == 1) and (strpos($LoggedUserName, 'dist') === false)) {
+/*if (((strpos($LoggedUserName, 'admin') !== false) or $DeletePermission == 1) and (strpos($LoggedUserName, 'dist') === false)) {
     $dataViewTable .= "<button type=\"button\" class=\"btn btn-danger\" name=\"delete\" id=\"delete\" value=\"Delete\" 
                         onclick= \"DeleteDataRecord('$RecordID', '$AgentID');\"> Delete</button>";
-}
+}*/
 
 $dataViewTable .= "<button type=\"button\" class=\"btn btn-primary\" data-bs-dismiss=\"modal\">Close</button>";
 
